@@ -3,17 +3,13 @@ class User {
   final String login;
   final String password;
   final String dateOfBirth;
-  List<String> favoriteArticles;
+  final List<String> favoriteArticles;
 
-  User({
-    required this.name,
-    required this.login,
-    required this.password,
-    required this.dateOfBirth,
-    this.favoriteArticles = const [],
-  });
+  User({required this.name, required this.login, required this.password, required this.dateOfBirth, this.favoriteArticles = const []});
 
-  void addFavoriteArticle(String title) {
+  static List<User> users = [];
+
+   void addFavoriteArticle(String title) {
     favoriteArticles.add(title);
   }
 

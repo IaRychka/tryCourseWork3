@@ -4,6 +4,10 @@ import 'user_profile_page.dart';
 import 'user.dart';
 
 class MainScreen extends StatefulWidget {
+  final User user;
+
+  MainScreen({required this.user});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -11,27 +15,14 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  final User user = User(
-    name: 'Иван Иванов',
-    login: 'ivan_ivanov',
-    password: 'password123',
-    dateOfBirth: '1990-01-01',
-  );
+  final List<Widget> _pages = [];
 
-  final List<Widget> _pages = [
-    AstrologyHomePage(user: User(
-      name: 'Иван Иванов',
-      login: 'ivan_ivanov',
-      password: 'password123',
-      dateOfBirth: '1990-01-01',
-    )),
-    UserProfilePage(user: User(
-      name: 'Иван Иванов',
-      login: 'ivan_ivanov',
-      password: 'password123',
-      dateOfBirth: '1990-01-01',
-    )),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _pages.add(AstrologyHomePage(user: widget.user));
+    _pages.add(UserProfilePage(user: widget.user));
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -61,3 +52,9 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
+
+
+
+/* git remote add origin https://github.com/IaRychka/tryCourseWork3.git
+git branch -M main
+git push -u origin main*/

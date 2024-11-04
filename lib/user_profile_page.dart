@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'user.dart';
 import 'article_detail_page.dart';
 
-class UserProfilePage extends StatelessWidget {
+class UserProfilePage extends StatefulWidget {
   final User user;
 
   UserProfilePage({required this.user});
+
+  @override
+  _UserProfilePageState createState() => _UserProfilePageState();
+}
+
+class _UserProfilePageState extends State<UserProfilePage> {
+  final TextEditingController _dateController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _dateController.text = DateFormat('dd MMMM yyyy').format(DateTime.parse(widget.user.dateOfBirth));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +37,7 @@ class UserProfilePage extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             Text(
-              user.name,
+              widget.user.name,
               style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8.0),
@@ -32,7 +46,7 @@ class UserProfilePage extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             Text(
-              user.login,
+              widget.user.login,
               style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8.0),
@@ -41,7 +55,7 @@ class UserProfilePage extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             Text(
-              user.password,
+              widget.user.password,
               style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8.0),
@@ -49,9 +63,14 @@ class UserProfilePage extends StatelessWidget {
               'Дата рождения:',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
-            Text(
-              user.dateOfBirth,
-              style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            TextField(
+              controller: _dateController,
+              decoration: const InputDecoration(
+                hintText: 'Введите дату в формате: день месяц год',
+              ),
+              onChanged: (value) {
+                // Здесь можно добавить логику для обработки изменения даты
+              },
             ),
             const SizedBox(height: 8.0),
             const Text(
@@ -59,7 +78,7 @@ class UserProfilePage extends StatelessWidget {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             Text(
-              user.getZodiacSign(),
+              widget.user.getZodiacSign(),
               style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16.0),
@@ -70,9 +89,9 @@ class UserProfilePage extends StatelessWidget {
             const SizedBox(height: 8.0),
             Expanded(
               child: ListView.builder(
-                itemCount: user.favoriteArticles.length,
+                itemCount: widget.user.favoriteArticles.length,
                 itemBuilder: (context, index) {
-                  final articleTitle = user.favoriteArticles[index];
+                  final articleTitle = widget.user.favoriteArticles[index];
                   final article = _findArticleByTitle(articleTitle);
 
                   return Card(
