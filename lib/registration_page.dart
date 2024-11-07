@@ -45,7 +45,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/zodiac_s.png'), // Используйте AssetImage для локального изображения
+            image: AssetImage('assets/zodiac_s.png'), 
             fit: BoxFit.cover,
           ),
         ),
