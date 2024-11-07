@@ -1,20 +1,36 @@
 class User {
-  final String name;
-  final String login;
-  final String password;
-  final String dateOfBirth;
+  String name;
+  String login;
+  String password;
+  String dateOfBirth;
   final List<String> favoriteArticles;
 
   User({required this.name, required this.login, required this.password, required this.dateOfBirth, required this.favoriteArticles});
 
   static List<User> users = [];
 
-   void addFavoriteArticle(String title) {
+  void addFavoriteArticle(String title) {
     favoriteArticles.add(title);
   }
 
   void removeFavoriteArticle(String title) {
     favoriteArticles.remove(title);
+  }
+
+  void updateName(String newName) {
+    name = newName;
+  }
+
+  void updateLogin(String newLogin) {
+    login = newLogin;
+  }
+
+  void updatePassword(String newPassword) {
+    password = newPassword;
+  }
+
+  void updateDateOfBirth(String newDateOfBirth) {
+    dateOfBirth = newDateOfBirth;
   }
 
   String getZodiacSign() {

@@ -35,21 +35,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Назад',
-        style: TextStyle(color: Color.fromARGB(255, 211, 211, 211))),
-        backgroundColor: const Color.fromARGB(255, 125, 101, 190),
+        title: Text(
+          "Регистрация",
+          style: TextStyle(color: Color.fromARGB(255, 211, 211, 211)),
+        ),
+        backgroundColor: const Color.fromARGB(255, 77, 70, 170),
         automaticallyImplyLeading: false,
       ),
       body: Container(
-        color: const Color.fromARGB(255, 191, 203, 224), // Фон фиолетовый
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/zodiac_s.png'), // Используйте AssetImage для локального изображения
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Container(
-                padding: EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 32.0), // Внутренний отступ сверху
+                padding: EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 32.0),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 169, 149, 226),
+                  color: const Color.fromARGB(255, 158, 160, 223),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Form(
@@ -65,9 +72,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           color: Color.fromARGB(255, 211, 211, 211),
                         ),
                       ),
-                      SizedBox(height: 16.0), // Отступ между заголовком и полями ввода
+                      SizedBox(height: 16.0),
                       Container(
-                        margin: EdgeInsets.only(bottom: 8.0), // Уменьшенный отступ
+                        margin: EdgeInsets.only(bottom: 8.0),
                         child: TextFormField(
                           controller: _nameController,
                           decoration: InputDecoration(
@@ -83,7 +90,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: 8.0), // Уменьшенный отступ
+                        margin: EdgeInsets.only(bottom: 8.0),
                         child: TextFormField(
                           controller: _loginController,
                           decoration: InputDecoration(
@@ -99,7 +106,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: 8.0), // Уменьшенный отступ
+                        margin: EdgeInsets.only(bottom: 8.0),
                         child: TextFormField(
                           controller: _passwordController,
                           decoration: InputDecoration(
@@ -116,7 +123,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: 8.0), // Уменьшенный отступ
+                        margin: EdgeInsets.only(bottom: 8.0),
                         child: Row(
                           children: [
                             Expanded(
@@ -144,18 +151,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10.0), // Уменьшенный отступ перед кнопкой
+                      SizedBox(height: 10.0),
                       ElevatedButton(
                         onPressed: _register,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 125, 101, 190), // Цвет кнопки
-                          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20), // Размер кнопки
+                          backgroundColor: Color.fromARGB(255, 77, 70, 170),
+                          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0), // Скругленные углы
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        child: Text('Зарегистрироваться',
-                        style: TextStyle(color: Color.fromARGB(255, 221, 221, 221))),
+                        child: Text(
+                          'Зарегистрироваться',
+                          style: TextStyle(color: Color.fromARGB(255, 221, 221, 221)),
+                        ),
                       ),
                     ],
                   ),

@@ -28,7 +28,7 @@ class ArticleDetailPage extends StatelessWidget {
           IconButton(
             icon: Icon(
               isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: isFavorite ? Colors.red : Colors.grey,
+              color: isFavorite ? const Color.fromARGB(255, 55, 0, 253) : Colors.grey,
             ),
             onPressed: onToggleFavorite,
           ),
