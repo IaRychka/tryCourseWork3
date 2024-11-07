@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'user.dart';
 import 'article_detail_page.dart';
@@ -13,18 +14,23 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
-  final TextEditingController _dateController = TextEditingController();
+  String _formattedDate = '';
 
   @override
   void initState() {
     super.initState();
-    _dateController.text = DateFormat('dd MMMM yyyy').format(DateTime.parse(widget.user.dateOfBirth));
+    initializeDateFormatting('ru', null).then((_) {
+      setState(() {
+        _formattedDate = DateFormat('dd MMMM yyyy', 'ru').format(DateTime.parse(widget.user.dateOfBirth));
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Профиль пользователя'),
       ),
       body: Padding(
@@ -63,14 +69,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
               'Дата рождения:',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
-            TextField(
-              controller: _dateController,
-              decoration: const InputDecoration(
-                hintText: 'Введите дату в формате: день месяц год',
-              ),
-              onChanged: (value) {
-                // Здесь можно добавить логику для обработки изменения даты
-              },
+            Text(
+              _formattedDate,
+              style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8.0),
             const Text(

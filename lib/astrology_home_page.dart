@@ -88,6 +88,7 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Астрологические статьи'),
       ),
       body: Column(

@@ -5,7 +5,7 @@ class User {
   final String dateOfBirth;
   final List<String> favoriteArticles;
 
-  User({required this.name, required this.login, required this.password, required this.dateOfBirth, this.favoriteArticles = const []});
+  User({required this.name, required this.login, required this.password, required this.dateOfBirth, required this.favoriteArticles});
 
   static List<User> users = [];
 
