@@ -21,9 +21,15 @@ class ArticleDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final List<String> sentences = content.split('.');
+    final String firstParagraph = '${sentences.take(4).join('.')}.';
+    final String secondParagraph = '${sentences.skip(4).join('.')}.';
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        backgroundColor: Color.fromARGB(255, 77, 70, 170),
         actions: [
           IconButton(
             icon: Icon(
@@ -34,31 +40,40 @@ class ArticleDetailPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
+      body:  Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'Дата: $date',
+              style: TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            SizedBox(height: 8.0),
+            Text(
+              'Знак зодиака: $zodiacSign',
+              style: TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            SizedBox(height: 16.0),
+            Text(
+              title,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
+            ),
+            SizedBox(height: 16.0),
             Image.network(
               imageUrl,
               width: double.infinity,
               height: 200,
               fit: BoxFit.cover,
             ),
-            SizedBox(height: 16.0),
             Text(
-              content,
+              firstParagraph,
               style: TextStyle(fontSize: 16.0),
             ),
             SizedBox(height: 16.0),
             Text(
-              'Знак зодиака: $zodiacSign',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-            ),
-            SizedBox(height: 8.0),
-            Text(
-              'Дата: $date',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+              secondParagraph,
+              style: TextStyle(fontSize: 16.0),
             ),
           ],
         ),

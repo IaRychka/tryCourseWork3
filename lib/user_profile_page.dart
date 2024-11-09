@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'articles.dart';
+
+import 'favorite_articles.dart';
 import 'user.dart';
 import 'article_detail_page.dart';
+
 
 class UserProfilePage extends StatefulWidget {
   final User user;
@@ -158,35 +160,56 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: widget.user.favoriteArticles.length,
+                      itemCount: favoriteArticles.length,
                       itemBuilder: (context, index) {
-                        final articleTitle = widget.user.favoriteArticles[index];
-                        final article = _findArticleByTitle(articleTitle);
                         return Card(
-                          margin: const EdgeInsets.all(8.0),
-                          elevation: 4.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
                           child: ListTile(
-                            leading: Image.network(
-                              article.imageUrl,
-                              width: 50,
-                              height: 50,
-                              fit: BoxFit.cover,
-                            ),
-                            title: Text(article.title),
-                            subtitle: Text(article.content),
+                            title: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      favoriteArticles[index].title,
+                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      favoriteArticles[index].date.toString(),
+                                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      favoriteArticles[index].zodiacSign,
+                                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Image.network(
+                                      favoriteArticles[index].imageUrl,
+                                      width: double.infinity,
+                                      height: 200,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      favoriteArticles[index].content,
+                                      style: TextStyle(fontSize: 14.0),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ), 
+                                  ],
+                                ),
+                              ),
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ArticleDetailPage(
-                                    title: article.title,
-                                    content: article.content,
-                                    zodiacSign: article.zodiacSign,
-                                    date: article.date.toString(),
-                                    imageUrl: article.imageUrl,
+                                    title: favoriteArticles[index].title,
+                                    content: favoriteArticles[index].content,
+                                    zodiacSign: favoriteArticles[index].zodiacSign,
+                                    date: favoriteArticles[index].date.toString(),
+                                    imageUrl: favoriteArticles[index].imageUrl,
                                     isFavorite: true,
                                     onToggleFavorite: () {},
                                   ),
@@ -195,6 +218,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             },
                           ),
                         );
+                        
                       },
                     ),
                   ],
@@ -205,9 +229,5 @@ class _UserProfilePageState extends State<UserProfilePage> {
         ),
       ),
     );
-  }
-
-  Article _findArticleByTitle(String title) {
-    return articles.firstWhere((article) => article.title == title);
   }
 }

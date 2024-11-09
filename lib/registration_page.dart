@@ -21,7 +21,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
         login: _loginController.text,
         password: _passwordController.text,
         dateOfBirth: _dateOfBirthController.text,
-        favoriteArticles: [],
       );
       User.users.add(newUser);
       Navigator.pushReplacement(
@@ -45,7 +44,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/zodiac_s.png'), 
+            image: AssetImage('assets/zodiac_s.png'), // Используйте AssetImage для локального изображения
             fit: BoxFit.cover,
           ),
         ),

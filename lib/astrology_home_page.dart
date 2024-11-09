@@ -29,13 +29,6 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
   void initState() {
     super.initState();
     selectedZodiacSign = widget.user.getZodiacSign();
-    _updateFavoriteStatus();
-  }
-
-  void _updateFavoriteStatus() {
-    for (var article in articles) {
-      article.isFavorite = widget.user.favoriteArticles.contains(article.title);
-    }
   }
 
   List<Article> get filteredArticles {
@@ -61,12 +54,6 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
 
   void _toggleFavorite(String title) {
     setState(() {
-      if (widget.user.favoriteArticles.contains(title)) {
-        widget.user.removeFavoriteArticle(title);
-      } else {
-        widget.user.addFavoriteArticle(title);
-      }
-      _updateFavoriteStatus();
     });
   }
 
@@ -74,6 +61,7 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 77, 70, 170),
         automaticallyImplyLeading: false,
         title: Text('Новости'),
       ),
@@ -128,21 +116,24 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
                 final article = filteredArticles[index];
                 return Card(
                   margin: EdgeInsets.all(8.0),
-                  child: ListTile(
-                    title: Text(article.title),
-                    subtitle: Padding(
+                  child: ListTile( 
+                    title: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                            Text(
+                              article.title,
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                    ),
                           Text(
                             'Дата: ${article.date.toString().split(' ')[0]}',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                           SizedBox(height: 4.0),
                           Text(
                             'Знак зодиака: ${article.zodiacSign}',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                           SizedBox(height: 8.0),
                           Image.network(
@@ -161,8 +152,7 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
                           SizedBox(height: 8.0),
                           FavoriteButton(
                             user: widget.user,
-                            articleTitle: article.title,
-                            onToggleFavorite: () => _toggleFavorite(article.title),
+                            onToggleFavorite: () => _toggleFavorite(article.title), id: filteredArticles[index].id,
                           ),
                         ],
                       ),
