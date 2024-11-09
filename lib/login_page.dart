@@ -4,6 +4,8 @@ import 'main_screen.dart';
 import 'registration_page.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -28,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
       }
       if (!userFound) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Неверный логин или пароль')),
+          const SnackBar(content: Text('Неверный логин или пароль')),
         );
       }
     }
@@ -38,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Авторизация',
           style: TextStyle(color: Color.fromARGB(255, 211, 211, 211)),
         ),
@@ -46,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
         automaticallyImplyLeading: false,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/zodiac_s.png'),
             fit: BoxFit.cover,
@@ -55,9 +57,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Container(
-                padding: EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 64.0),
+                padding: const EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 64.0),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 158, 160, 223),
                   borderRadius: BorderRadius.circular(10.0),
@@ -67,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
+                      const Text(
                         'Авторизация',
                         style: TextStyle(
                           fontSize: 24.0,
@@ -75,12 +77,12 @@ class _LoginPageState extends State<LoginPage> {
                           color: Color.fromARGB(255, 77, 70, 170),
                         ),
                       ),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 16.0),
                       Container(
-                        margin: EdgeInsets.only(bottom: 8.0),
+                        margin: const EdgeInsets.only(bottom: 8.0),
                         child: TextFormField(
                           controller: _loginController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Логин',
                             border: OutlineInputBorder(),
                           ),
@@ -93,10 +95,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: 8.0),
+                        margin: const EdgeInsets.only(bottom: 8.0),
                         child: TextFormField(
                           controller: _passwordController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Пароль',
                             border: OutlineInputBorder(),
                           ),
@@ -109,26 +111,26 @@ class _LoginPageState extends State<LoginPage> {
                           },
                         ),
                       ),
-                      SizedBox(height: 10.0),
+                      const SizedBox(height: 10.0),
                       ElevatedButton(
                         onPressed: _login,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color.fromARGB(255, 77, 70, 170),
-                          padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+                          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Войти',
                           style: TextStyle(color: Color.fromARGB(255, 221, 221, 221)),
                         ),
                       ),
-                      SizedBox(height: 10.0),
+                      const SizedBox(height: 10.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Еще нет аккаунта? '),
+                          const Text('Еще нет аккаунта? '),
                           TextButton(
                             onPressed: () {
                               Navigator.push(
@@ -136,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                                 MaterialPageRoute(builder: (context) => RegistrationPage()),
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               'Зарегистрироваться',
                               style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                             ),

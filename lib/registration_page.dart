@@ -3,6 +3,8 @@ import 'user.dart';
 import 'login_page.dart';
 
 class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
+
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
 }
@@ -25,7 +27,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       User.users.add(newUser);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
+        MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     }
   }
@@ -34,7 +36,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Регистрация",
           style: TextStyle(color: Color.fromARGB(255, 211, 211, 211)),
         ),
@@ -42,9 +44,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
         automaticallyImplyLeading: false,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/zodiac_s.png'), // Используйте AssetImage для локального изображения
+            image: AssetImage('assets/zodiac_s.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -53,7 +55,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Container(
-                padding: EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 32.0),
+                padding: const EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 32.0),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 158, 160, 223),
                   borderRadius: BorderRadius.circular(10.0),
@@ -63,7 +65,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
+                      const Text(
                         'Регистрация',
                         style: TextStyle(
                           fontSize: 24.0,
@@ -71,12 +73,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           color: Color.fromARGB(255, 211, 211, 211),
                         ),
                       ),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 16.0),
                       Container(
                         margin: EdgeInsets.only(bottom: 8.0),
                         child: TextFormField(
                           controller: _nameController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Имя',
                             border: OutlineInputBorder(),
                           ),
@@ -89,10 +91,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: 8.0),
+                        margin: const EdgeInsets.only(bottom: 8.0),
                         child: TextFormField(
                           controller: _loginController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Логин',
                             border: OutlineInputBorder(),
                           ),
@@ -105,10 +107,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: 8.0),
+                        margin: const EdgeInsets.only(bottom: 8.0),
                         child: TextFormField(
                           controller: _passwordController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Пароль',
                             border: OutlineInputBorder(),
                           ),
@@ -122,13 +124,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: 8.0),
+                        margin: const EdgeInsets.only(bottom: 8.0),
                         child: Row(
                           children: [
                             Expanded(
                               child: TextFormField(
                                 controller: _dateOfBirthController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: 'Дата рождения (YYYY-MM-DD)',
                                   border: OutlineInputBorder(),
                                 ),
@@ -143,24 +145,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             Tooltip(
                               message: 'Введите дату рождения в формате год-месяц-день, цифрами, пример 1990-06-01',
                               child: IconButton(
-                                icon: Icon(Icons.help),
+                                icon: const Icon(Icons.help),
                                 onPressed: () {},
                               ),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 10.0),
+                      const SizedBox(height: 10.0),
                       ElevatedButton(
                         onPressed: _register,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 77, 70, 170),
-                          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                          backgroundColor: const Color.fromARGB(255, 77, 70, 170),
+                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Зарегистрироваться',
                           style: TextStyle(color: Color.fromARGB(255, 221, 221, 221)),
                         ),

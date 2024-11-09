@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'article_detail_page.dart';
 import 'articles.dart';
 import 'user.dart';
@@ -7,7 +8,7 @@ import 'favorite_button.dart';
 class AstrologyHomePage extends StatefulWidget {
   final User user;
 
-  AstrologyHomePage({required this.user});
+  const AstrologyHomePage({super.key, required this.user});
 
   @override
   _AstrologyHomePageState createState() => _AstrologyHomePageState();
@@ -23,7 +24,7 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
   DateTime get currentDate => DateTime.now();
 
   DateTime get startOfWeek => currentDate.subtract(Duration(days: currentDate.weekday - 1));
-  DateTime get endOfWeek => startOfWeek.add(Duration(days: 6));
+  DateTime get endOfWeek => startOfWeek.add(const Duration(days: 6));
 
   @override
   void initState() {
@@ -43,7 +44,7 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
             articleDate.month == currentDate.month &&
             articleDate.day == currentDate.day;
       } else if (selectedDateFilter == 'Week') {
-        dateMatch = articleDate.isAfter(startOfWeek.subtract(Duration(days: 1))) && articleDate.isBefore(endOfWeek.add(Duration(days: 2)));
+        dateMatch = articleDate.isAfter(startOfWeek.subtract(const Duration(days: 1))) && articleDate.isBefore(endOfWeek.add(const Duration(days: 2)));
       } else if (selectedDateFilter == 'Month') {
         dateMatch = articleDate.year == currentDate.year && articleDate.month == currentDate.month;
       }
@@ -52,7 +53,7 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
     }).toList();
   }
 
-  void _toggleFavorite(String title) {
+  void _toggleFavorite() {
     setState(() {
     });
   }
@@ -61,19 +62,19 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 77, 70, 170),
+        backgroundColor: const Color.fromARGB(255, 77, 70, 170),
         automaticallyImplyLeading: false,
-        title: Text('Новости'),
+        title: const Text('Новости'),
       ),
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Expanded(
                   child: DropdownButton<String>(
-                    hint: Text('Выберите знак зодиака'),
+                    hint: const Text('Выберите знак зодиака'),
                     value: selectedZodiacSign,
                     onChanged: (String? newValue) {
                       setState(() {
@@ -88,10 +89,10 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
                     }).toList(),
                   ),
                 ),
-                SizedBox(width: 8.0),
+                const SizedBox(width: 8.0),
                 Expanded(
                   child: DropdownButton<String>(
-                    hint: Text('Выберите фильтр даты'),
+                    hint: const Text('Выберите фильтр даты'),
                     value: selectedDateFilter,
                     onChanged: (String? newValue) {
                       setState(() {
@@ -115,44 +116,43 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
               itemBuilder: (context, index) {
                 final article = filteredArticles[index];
                 return Card(
-                  margin: EdgeInsets.all(8.0),
+                  margin: const EdgeInsets.all(8.0),
                   child: ListTile( 
                     title: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                             Text(
                               article.title,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                     ),
                           Text(
-                            'Дата: ${article.date.toString().split(' ')[0]}',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            'Дата: ${DateFormat('d.M.y').format(article.date)}',
+                            style: const TextStyle(fontSize: 14, color: Colors.grey),
                           ),
-                          SizedBox(height: 4.0),
+                          const SizedBox(height: 4.0),
                           Text(
                             'Знак зодиака: ${article.zodiacSign}',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            style: const TextStyle(fontSize: 14, color: Colors.grey),
                           ),
-                          SizedBox(height: 8.0),
+                          const SizedBox(height: 8.0),
                           Image.network(
                             article.imageUrl,
                             width: double.infinity,
                             height: 150,
                             fit: BoxFit.cover,
                           ),
-                          SizedBox(height: 8.0),
+                          const SizedBox(height: 8.0),
                           Text(
                             article.content,
-                            style: TextStyle(fontSize: 14.0),
+                            style: const TextStyle(fontSize: 14.0),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(height: 8.0),
+                          const SizedBox(height: 8.0),
                           FavoriteButton(
-                            user: widget.user,
-                            onToggleFavorite: () => _toggleFavorite(article.title), id: filteredArticles[index].id,
+                            onToggleFavorite: () => _toggleFavorite(), id: filteredArticles[index].id,
                           ),
                         ],
                       ),
@@ -165,10 +165,10 @@ class _AstrologyHomePageState extends State<AstrologyHomePage> {
                             title: article.title,
                             content: article.content,
                             zodiacSign: article.zodiacSign,
-                            date: article.date.toString().split(' ')[0],
+                            date: article.date,
                             imageUrl: article.imageUrl,
                             isFavorite: article.isFavorite,
-                            onToggleFavorite: () => _toggleFavorite(article.title),
+                            onToggleFavorite: () => _toggleFavorite(), id: filteredArticles[index].id,
                           ),
                         ),
                       );

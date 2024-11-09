@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:star_app/favorite_articles.dart';
 import 'articles.dart';
-import 'user.dart';
+
 
 class FavoriteButton extends StatefulWidget {
-  final User user;
+
   final VoidCallback onToggleFavorite;
   final int id;
 
-  FavoriteButton({
-    required this.user,
+  const FavoriteButton({super.key, 
+  
     required this.onToggleFavorite,
     required this.id,
   });
@@ -22,8 +22,8 @@ class _FavoriteButtonState extends State<FavoriteButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.favorite_border),
-      selectedIcon: Icon(Icons.favorite),
+      icon: const Icon(Icons.favorite_border),
+      selectedIcon: const Icon(Icons.favorite),
       color: articles[widget.id].colorFavoriteButton,
       onPressed: () {
         if (articles[widget.id].isFavorite == false) {
@@ -37,7 +37,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
             isFavorite: articles[widget.id].isFavorite,
             colorFavoriteButton: articles[widget.id].colorFavoriteButton,
           ));
-          articles[widget.id].colorFavoriteButton = Color.fromARGB(255, 55, 0, 253);
+          articles[widget.id].colorFavoriteButton = const Color.fromARGB(255, 55, 0, 253);
           setState(() {
             articles[widget.id].isFavorite =
                 !articles[widget.id].isFavorite;

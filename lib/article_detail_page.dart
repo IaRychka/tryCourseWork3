@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:star_app/favorite_button.dart';
 
-class ArticleDetailPage extends StatelessWidget {
+class ArticleDetailPage extends StatefulWidget {
   final String title;
   final String content;
   final String zodiacSign;
-  final String date;
+  final DateTime date;
   final String imageUrl;
   final bool isFavorite;
   final VoidCallback onToggleFavorite;
-
-  ArticleDetailPage({
+  final int id;
+  
+ const ArticleDetailPage({
     required this.title,
     required this.content,
     required this.zodiacSign,
@@ -17,67 +20,82 @@ class ArticleDetailPage extends StatelessWidget {
     required this.imageUrl,
     required this.isFavorite,
     required this.onToggleFavorite,
+    required this.id,
   });
+
+
+
+  @override
+   State <ArticleDetailPage> createState() =>  ArticleDetailPageState();
+}
+
+class  ArticleDetailPageState extends State <ArticleDetailPage> {
+
+
+  void _toggleFavorite() {
+    setState(() {
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
-
-    final List<String> sentences = content.split('.');
+     final List<String> sentences = widget.content.split('.');
     final String firstParagraph = '${sentences.take(4).join('.')}.';
     final String secondParagraph = '${sentences.skip(4).join('.')}.';
 
-    return Scaffold(
+     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
-        backgroundColor: Color.fromARGB(255, 77, 70, 170),
-        actions: [
-          IconButton(
-            icon: Icon(
-              isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: isFavorite ? const Color.fromARGB(255, 55, 0, 253) : Colors.grey,
-            ),
-            onPressed: onToggleFavorite,
-          ),
-        ],
+        title: Text(widget.title),
+        backgroundColor: const Color.fromARGB(255, 77, 70, 170),
+        
       ),
       body:  Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Дата: $date',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              'Дата: ${DateFormat('d.M.y').format(widget.date)}',
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(
-              'Знак зодиака: $zodiacSign',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              'Знак зодиака: ${widget.zodiacSign}',
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
-              title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
+              widget.title,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Image.network(
-              imageUrl,
+              widget.imageUrl,
               width: double.infinity,
               height: 200,
               fit: BoxFit.cover,
             ),
             Text(
               firstParagraph,
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               secondParagraph,
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
             ),
+            const SizedBox(height: 8.0),
+              FavoriteButton(
+             
+                onToggleFavorite: () => _toggleFavorite(),  id: widget.id,
+                          ),
           ],
         ),
       ),
     );
   }
 }
+
+
+

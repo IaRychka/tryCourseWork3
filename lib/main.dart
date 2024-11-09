@@ -3,10 +3,12 @@ import 'login_page.dart';
 
 
 void main() {
-  runApp(AstrologyApp());
+  runApp(const AstrologyApp());
 }
 
 class AstrologyApp extends StatelessWidget {
+  const AstrologyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +16,7 @@ class AstrologyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: const LoginPage(),
     );
   }
 }

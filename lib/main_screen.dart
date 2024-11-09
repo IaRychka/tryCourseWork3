@@ -6,7 +6,7 @@ import 'user.dart';
 class MainScreen extends StatefulWidget {
   final User user;
 
-  MainScreen({required this.user});
+  const MainScreen({super.key, required this.user});
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromARGB(255, 117, 110, 226),
+        backgroundColor: const Color.fromARGB(255, 117, 110, 226),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
